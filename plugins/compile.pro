@@ -1,0 +1,1 @@
+@plugins/rat_plugin_quote

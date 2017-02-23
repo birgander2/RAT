@@ -1,0 +1,29 @@
+\chapter{SAR Multichannel Subapertrues}
+
+\section{Data Types}
+The dimensions of data are: $N_x,N_y$ --- image dimensions; $N_{ap}$ --- number
+of subapertures; $N_p$ --- number of vector elements in InSAR-, POLSAR-, POLInSAR- vectors.
+\begin{itemize}
+  \item \emph{Subapertures} Single channel subapertures
+    \[data = [ N_{ap}; N_x; N_y ]\]
+  \item \emph{Multi-channel Subapertures} Multichannel subapertures (e.g. for interferometry)
+    \[data = [ N_{p}; N_{ap}; N_x; N_y ] \qquad N_p=N_{intrf}=2\mbox{ for interferometry}\]
+  \item \emph{Polarimetric Subapertures} Multichannel subapertures for polarimetry
+    \[data = [ N_{p}; N_x; N_y ] \qquad N_p=N_{pol}=\{3;4\}\]
+  \item \emph{POLInSAR Subapertures} Multichannel subapertures for POLInSAR
+    \[data = [ N_{p}; N_x; N_y ] \qquad N_p=N_{polin}=N_{pol}*N_{intrf}=\{6;8\}\]
+    POLIn-channel order = $[ pol_0intrf_0;\ pol_1intrf_0;\ pol_2intrf_0;\ pol_0intrf_1;\ pol_1intrf_1;\ pol_2intrf_1]$
+  \item \emph{Covariance matrices for every Subaperture}
+    \[data = [ N_{p^2}; N_{ap}; N_x; N_y ] \qquad N_{p^2}=N_p^2=\{N_{pol}^2; N_{polin}^2\}\]
+  \item \emph{Subapertures covariance matrix}
+    \[data = [ N_{apcov}; N_{apcov}; N_x; N_y ] \qquad N_{apcov}=N_{p}*N_{ap}\]
+  \item \emph{Subapertures stationarity [log(L)]} from \cite{ferro-famil03:subap}
+    \[data = [ N_x; N_y ]\]
+\end{itemize}
+
+\section{Nonstationarity}
+
+Evaluates the stationarity over azimuth subapertures. The result is
+\emph{Subapertures stationarity [log(L)]}.\\
+The nonstationary subapertures can be removed to generate a more stationary SAR image.
+Compare \cite{ferro-famil03:subap}.

@@ -1,0 +1,88 @@
+\documentclass[11pt,a4paper,twoside]{book}
+
+\usepackage{cover}
+%======================================================================
+% Use package
+\usepackage{graphicx}
+\usepackage {subfigure}
+\usepackage {hhline}
+\usepackage{color}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+%\usepackage{ulem}
+%\usepackage{fancyheadings}
+\usepackage{fancyhdr}
+\usepackage{placeins}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{cite}
+
+%======================================================================
+% EN-TETES ET PIEDS DE PAGE
+\pagestyle{fancy}
+\addtolength{\headwidth}{\marginparsep}
+\addtolength{\headwidth}{\marginparwidth}
+\renewcommand{\chaptermark}[1]{\markboth{\thechapter\ #1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+\fancyhf{}
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[LO]{\rightmark}
+\fancyhead[RE]{\leftmark}
+
+\fancypagestyle{toto}{
+\fancyhead{}
+\fancyhead[LE,RO]{\thepage}
+}
+
+%======================================================================
+% CHANGE LES POLICES POUR LES TITRES DES SECTIONS
+\usepackage{sectsty}
+\allsectionsfont{\sffamily}
+
+%======================================================================
+% STYLES DES PARAGRAPHES
+\parindent 0em % Permet de commencer les paragraphes au début de la marge
+\parskip 1.8ex plus 0.0ex minus 0.5 ex
+\renewcommand{\baselinestretch}{1.1}
+
+
+\begin{document}
+%============
+% Permet d'avoir une autre numérotation pour le début du document
+\frontmatter
+
+%============
+% Display the cover and table of content
+
+\version{0.11RC}
+\datenow{31. April 2004}
+\version{0.18}
+\datenow{18. February 2007}
+\makecover
+\newpage\thispagestyle{empty}\addtocounter{page}{-1}
+~\newpage\thispagestyle{empty}\addtocounter{page}{-1}
+\makecover
+\newpage\thispagestyle{empty}\addtocounter{page}{-1}
+~\newpage\thispagestyle{empty}\addtocounter{page}{-1}
+\tableofcontents
+
+%=========
+% Start the correct numbering now
+\mainmatter
+
+\include{intro}
+\include{type_of_data}
+\include{io}
+\include{sar}
+\include{polar}
+\include{polinsar}
+\include{insar}
+\include{subap}
+\include{devel}
+
+%\bibliographystyle{}
+\bibliography{rat_references}
+\bibliographystyle{unsrt}
+
+\end{document}

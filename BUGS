@@ -1,0 +1,21 @@
+BUGS:
+
+Critical     Routine		Description   
+
+   +         tool_box		Support for single file previews for multi-files
+   +         flat-earth       	All signs should be consistent
+   -         preview          	Speed ups for symmetric matrices
+   -         tool-box		Select Channel Toolbox: RGB Color: names do not 
+				correspond to the correct channels and to the data 
+				(at least in multi-dim data)
+
+ROUTINES:
+
+- missing: projection on a specific polarisation
+- remove?: linear flat-earth in polinsar?
+
+SOLVED:
+
+- missing: range filter
+- channel_default: Naming and defaults for all the new polinsar channels
+

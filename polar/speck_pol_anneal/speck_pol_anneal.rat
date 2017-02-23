@@ -1,0 +1,179 @@
+;------------------------------------------------------------------------
+; RAT Module: speck_pol_anneal
+;
+; written by    : Marc Jäger
+; last revision : June 2005
+;------------------------------------------------------------------------
+; Polarimetric speckle filter using simulated annealing
+;------------------------------------------------------------------------
+
+
+pro speck_pol_anneal, CALLED=called
+common rat, types, file, wid, config
+common channel, channel_names, channel_selec, color_flag, palettes, pnames
+
+; check if array is usable
+
+if file.type ne 220 then begin
+    error_button = DIALOG_MESSAGE(['The input needs to be the covariance matrix.'], DIALOG_PARENT = wid.base, TITLE='Error',/ERROR)
+    return
+endif
+
+
+iterNum = 50
+cooling = 1.0
+initTemp = 4000.0
+lookNum = 1.0
+
+if not keyword_set(called) then begin ; Graphical interface
+    main = WIDGET_BASE(GROUP_LEADER=wid.base,row=5,TITLE='Simulated Annealing',/modal)
+
+    line5 = WIDGET_BASE(main,column=3)
+    field5   = CW_FIELD(line5,VALUE=iterNum,/integer,TITLE='Number of iterations:          ',XSIZE=5)
+
+    line7 = WIDGET_BASE(main,column=3)
+    field7   = CW_FIELD(line7,VALUE=cooling,/float,TITLE='Cooling constant (beta): ',XSIZE=7)
+
+    line8 = WIDGET_BASE(main,column=3)
+    field8   = CW_FIELD(line8,VALUE=initTemp,/float,TITLE='Initial temperature: ',XSIZE=7)
+
+    line9 = WIDGET_BASE(main,column=3)
+    field9   = CW_FIELD(line9,VALUE=lookNum,/float,TITLE='Number of looks: ',XSIZE=7)
+
+    buttons  = WIDGET_BASE(main,column=3,/frame)
+    but_ok   = WIDGET_BUTTON(buttons,VALUE=' OK ',xsize=80,/frame)
+    but_canc = WIDGET_BUTTON(buttons,VALUE=' Cancel ',xsize=60)
+    but_info = WIDGET_BUTTON(buttons,VALUE=' Info ',xsize=60)
+    WIDGET_CONTROL, main, /REALIZE, default_button = but_canc,tlb_get_size=toto
+    pos = center_box(toto[0],drawysize=toto[1])
+    widget_control, main, xoffset=pos[0], yoffset=pos[1]
+    
+    
+    repeat begin
+        event = widget_event(main)
+        if event.id eq but_info then begin ; Info Button clicked
+            infotext = ['SPECKLE FILTER USING SIMULATED ANNEALING',$
+                        ' ',$
+			'For further information see:', $
+			'Jesper Schou and Henning Skriever', $
+			'Restoration of Polarimetric SAR Images Using Simulated Annealing', $
+			'IEEE TGRS, Vol. 39 (9), September 2001', $
+			' ', $
+                        'RAT module written 06/2005 by Marc Jaeger']
+            info = DIALOG_MESSAGE(infotext, DIALOG_PARENT = main, TITLE='Information')
+        end
+    endrep until (event.id eq but_ok) or (event.id eq but_canc) 
+	
+    widget_control,field5,GET_VALUE=iterNum
+    widget_control,field7,GET_VALUE=cooling
+    widget_control,field8,GET_VALUE=initTemp
+    widget_control,field9,GET_VALUE=lookNum
+
+    widget_control,main,/destroy
+    if event.id ne  but_ok then return ; OK button _not_ clicked
+endif
+
+WIDGET_CONTROL,/hourglass
+
+outputfile  = config.tempdir+config.workfile2
+finalfile   = config.tempdir+config.workfile1
+
+                                ; undo function
+
+if not keyword_set(called) then begin
+    if file.name eq finalfile then begin   
+        file_copy,file.name,config.tempdir+config.workfile3,/overwrite
+        config.undofile = config.tempdir+config.workfile3
+    endif else config.undofile = file.name
+endif
+
+head = 1l
+
+rrat,file.name,covarFd,header=head,info=info,type=type
+point_lun, -covarFd, covarDataOffset
+covarSize = file.vdim
+
+srat,outputfile,outFd,header=[covarSize,covarSize,file.xdim,file.ydim,6l],info=info,type=220l
+point_lun, -estimFd, estimDataOffset
+
+energyFile = outputfile + ".energy"
+get_lun, energyFd
+openw, energyFd, energyFile
+
+bs = config.blocksize
+calc_blocks_normal,file.ydim,bs,blockNum,bs_last 
+blocksizes = intarr(blockNum)+bs
+blocksizes[blocksNum-1] = bs_last
+
+cliqueConfig = calcCliqueConfigurations
+cliqueNum = (size(cliqueConfig))[3]
+
+for i=0,iterNum-1 do begin
+    progress,Message='Iteration' + string(i+1),/cancel_button
+
+    temperature = initTemp / alog(1.0 + cooling*i)
+
+    point_lun, covarFd, covarDataOffset
+    point_lun, estimFd, estimDataOffset
+    point_lun, energyFd, 0
+
+    for j=0,blockNum-1 do begin
+        energyDensity = !values.f_infinity + fltarr(file.xdim,blockSizes[j])
+
+        blockSize = [covarSize,covarSize,file.xdim,blockSizes[j]]
+        covarBlock = complexarr(blockSize)
+        readu, covarFd, covarBlock
+        
+        if (i gt 0) then begin
+            estimBlock = complexarr(blockSize)
+
+            point_lun, -estimFd, estimOffset
+            readu, estimFd, estimBlock
+            point_lun, estimFd, estimOffset
+
+        end else begin
+            estimBlock = covarBlock
+        end
+
+        newEstimBlock = complexarr(blockSize)
+
+        lookBlock = calcEffectiveNumLooks(estimBlock)
+
+        for k=0,cliqueNum-1 do begin
+            fractionDone = (j*cliqueNum+k+1)/(blockNum*cliqueNum)
+            progress,percent=100.0*fractionDone,/check_cancel
+            if wid.cancel eq 1 then return
+
+            clique = reform(cliqueConfig[*,*,k])
+            updateEstimate, covarBlock, estimBlock, lookBlock, newEstimBlock, energyDensity, lookNum
+        end
+        
+        if (i gt 0) then begin
+            lastDensity = fltarr(file.xdim, blockSizes[j])
+
+            pount_lun, -energyFd, energyOffset
+            readu, energyFd, lastDensity
+            point_lun, -energyFd, energyOffset
+            writeu, energyFd, energyDensity
+
+            energyGradient = energyDensity-lastDensity
+            finaliseEstimate, estimBlock, newEstimBlock, energyGradient, temperature
+        end else estimBlock = newEstimBlock
+
+        writeu, estimFd, estimBlock
+
+    end
+end
+
+file_move,outputfile,finalfile,/overwrite
+file_delete,energyFile
+file.name = finalfile
+
+free_lun,covarFd,estimFd,energyFd,
+
+if not keyword_set(called) then begin
+    generate_preview
+    update_info_box
+endif	
+	
+end

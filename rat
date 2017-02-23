@@ -1,0 +1,6 @@
+cd /home/reig_an/Work/Rat/rat_svn/
+idl << final
+.compile rat
+rat,startfile="$1",/block
+final
+echo $1

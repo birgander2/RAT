@@ -1,0 +1,126 @@
+============
+  REALTODO 
+============
+
+- Make PolSAR classifiers easier / update them (started)
+- Add EMPLR classifier (started)
+- Check / remove some of the multifile stuff
+- Check display of change detection results
+- Advanced usage of RAT from the bash + nice tutorial (started)
+
+========
+  TODO 
+========
+
+General:
+
+- Transform rit file into an xml file (started, make it easy to add new parameters, information, etc.)
+- Change size of the main rat window using mouse (started)
+- Handling of system parameters (sensor & orbit) (started)
+- Generation of classification report files
+- extension of block_inv and block_det for 6x6 and 8x8 matrices
+- contrast adjustment (done, but can be made better)
+- rotate left / right
+- Include some single-channel routines for supervised classification, analyis etc.
+- multitemporal analysis / multifiles (starded, diploma)
+
+IO:
+
+- Import file generated using ROI_PAC (started)
+- ENVI import for BIL
+- More input formats  like AIRSAR, SIR-C, etc. (ongoing)
+
+SAR:
+
+- Adapt RefLee and IDAN filters to stacked amplitude imagess
+- include even more speckle filter (Weirbull, Wavelet...)
+- include some more edge detectors (ML)
+
+Polarimetry:
+
+- symmetrisation during loading
+- span only on certain data types
+- Polarimetric distributed target analysis
+- Polarimetric noise reduction (eigendecomposition)
+- Wishart: logging of convergence of cluster centres
+
+Interferometry:
+
+- Coherence bias removal
+- construct insar pair should work also for 2 different image sizes
+- ellipsoid flat-earth estimation (started)
+- Orbit analysis for calculating flat-earth and range filter parameters
+- Unwrapping (started)
+- slant range noise filter
+- Anaglyph calculation
+
+PolInSAR
+
+- Coherence bias removal
+- Add Tomography routines
+
+=========
+  IDEAS
+=========
+
+documentation started
+Antenna correction
+
+============
+  FINISHED
+============
+
+- adaptive range filtering
+- Polarimetric calibration routines
+- Full support of 2 (partial polarimetry) channels (GIVEN UP!)
+- zoom should always magnify (show) individual pixels
+- Scrolling problems (on Windows only)
+- No of looks calculation
+- include some more edge detectors (Canny)
+- New progress bar with a cancel button (to cancel the current operation)
+- Pass filename to open from UNIX command line (requires small shellscript)
+- Cut region should scroll automatically when reaching the window boundaries
+- Update preview attachment when window size was changed
+- data management routine (started ...)
+- enhancement of the select channel routines (started ...)
+- Check if file is existing when saving
+- Speed up MAP filters 
+- ENVISAT import (in work)
+- change from a preferences file to a preferences directory
+- ask before overwriting an existing file.
+- Calculate variation coefficient
+- Texture analysis
+- switch to correct use of directory separators (PATH_SEP)
+- Automatic setting of home and tmp directorys
+- replace platform dependent file copy / moves with FILE_COPY/MOVE
+- Shaded relief
+- GUI on M$-Windows looks very ugly and has errors
+- Better E-SAR import
+- Pauli decomposition also on matrices
+- Wishart classification
+- flat-earth from file
+- presumming / resize not working correctly on phase values
+- Preferences: add '/' if necessary
+- include some more speckle filter (Kuan, MAP, Frost, Lee-Sigma)
+- remove 'inputfile' in some routines (problems in combination with /called)
+- Generic export (no header)
+- Freeman - Durden Decomposition (wrong? has to be checked)
+- When pressing cancel the path is lost
+- Windows pop in forground with every change
+- Extract Entropy / Alpha / Anisotropy from combi-file
+- progress bar
+- extraction of entropy, alpha and anisotropy
+- Eigenvalue decomposition into one file, i.e. 4 x 3 x X x Y
+- Entalpani decomposition into one file, i.e. 3 x X x Y
+- polarimetric Lee-Filter (wrong? have to be checked)
+- polarimetric refined Lee-Filter (wrong? have to be checked)
+- Undo function
+- Projection slant-range ---> ground range
+- Adaption to M$-windows ????
+- presumming / resize function
+- transform integer -> float (easy)
+- pulldown-menues: check also for selected menu, not only for selected button
+- preferences dialog, for setting values of 'definitions.pro'
+- when saving as RAT, info and filetype are not used (they may have changed)
+- dialog for editing RAT file information, especially for setting file.type 
+- mirror 

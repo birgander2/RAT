@@ -1,0 +1,117 @@
+\chapter{SAR Interferometry (InSAR)}
+RAT can handle interferometric image pairs. An interferometric image
+pair is stored in a single file, in pixel interleave format. 
+
+%---------------------------------------------------------------
+\section{Coregistration}
+%---------------------------------------------------------------
+Interferometric image pairs are usually not coregistered. Reasons
+can be the baseline between the images, different range delays, shifted
+image frames etc. As even a small misregistration drastically degrade the
+coherence of an interferogram, before further processing a precise
+coregistration has to be performed.
+
+%---------------------------------------------------------------
+\subsection{Global offset}\label{sec:insar_goff}
+%---------------------------------------------------------------
+This routine can shift the whole slave image by a constant offset.
+The offset has to be an integer number, i.e. subpixel shifts
+can not be performed with this routine. Enter the offset values in 
+the upper box and press 'OK' to shift the slave image. 
+
+If you don't know the image offset, you can use the "automatic offset
+estimation" to estimate it. The default values in the boxes should be
+o.k. for most cases. You have to change them only if you have images
+with very large offsets. Shortly after "start estimation" has been pressed,
+the estimated values appear in the upper box. Press "OK" to shift
+the slave.
+
+For offset estimation, the method of amplitude correlation is used. 
+%---------------------------------------------------------------
+\subsection{Subpixel offset}\label{sec:insar_soff}
+%---------------------------------------------------------------
+Very much the same as function \ref{sec:insar_goff}. A constant shift
+of the entire slave image is performed, this time allowing floating point
+values as offsets. For shifting, cubic interpolations are used.
+It is not necessary to use this function when it is planned to use
+"array of patches" or similar afterwards.
+
+The estimation is based on oversampled amplitude correlation is used.
+It is not possible to estimate very large offsets. In this case use
+function \ref{sec:insar_goff} before.
+%---------------------------------------------------------------
+\subsection{Array of patches}\label{sec:insar_soff}
+%---------------------------------------------------------------
+This function estimates image offsets on a grid of small patches
+distributed over the image. Then, a 2D-warping function is applied on
+the slave image for coregistration. This function is useful if the
+offsets are not constant over the image, which is often the case
+in airborne repeat-pass images or spaceborne images with strong
+topography.
+
+In the first box, the number of patches and their size can be specified.
+Don't select a too small size of the patches, since this will make the
+results unreliable. Press "OK" to start the estimation.
+
+After a while, a second box will appear showinh the vector field of
+offsets. With the 2 edit buttons you can eliminate by hand obviously
+wrong estimates. When everything looks good, press "Start coregistration"
+to warp the slave image (time consuming!). Oversampling factors of 2 or 4
+can help to better preserve image quality.
+
+For offset estimation, oversampled amplitude correlation is used. For
+warping, cubic convolution, is desired combined with FFT based 
+oversampling, is used.
+
+%---------------------------------------------------------------
+%---------------------------------------------------------------
+\section{Phase noise filter}
+%---------------------------------------------------------------
+%---------------------------------------------------------------
+Phase noise filtering is used to enhance the quality of the interferometric
+phase. It is usually employed prior to phase unwrapping, but can also be
+useful for other purposes.
+%---------------------------------------------------------------
+\subsection{Boxcar}
+%---------------------------------------------------------------
+Boxcar filtering is a very simple filter: It is just a 
+local averaging over the give rectangular box. Becuase of phase
+wrapping effects, averaging is performed in the complex domain,
+even if only a floating point phase is provided.
+%---------------------------------------------------------------
+\subsection{Goldstein}
+%---------------------------------------------------------------
+The Goldstein filter is a spectral filter which enhances
+dominant fringe components in a local box. This is achieved by
+multiplying the fringe spectra with its own amplitude power a
+certain filter parameter (spectral exponent). Goldstein filtering
+is very powerful in relatively high coherent regions, but might 
+fail in low coherent areas.
+
+In RAT, the window size is fixed to 64x64 pixels with an overlap
+of 32 pixels.
+
+%---------------------------------------------------------------
+\subsection{GLSME}
+%---------------------------------------------------------------
+Another InSAR specific fringe filter. GLSME filtering minimises
+globally the phase noise fluctuations by a least-squares approach.
+GLSME seems to be very powerful especially for very low
+coherent regions surrounded by high coherent areas.
+
+
+%---------------------------------------------------------------
+%---------------------------------------------------------------
+\section{Coherence}
+%---------------------------------------------------------------
+%---------------------------------------------------------------
+\subsection{Boxcar}
+\subsection{Gauss}
+\section{Remove flat-earth}
+\subsection{linear}
+\subsection{from file}
+\section{Shaded relief}
+\section{Transform}
+\subsection{pair to interferogram}
+\subsection{extract amplitude}
+\subsection{extract phase}

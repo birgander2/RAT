@@ -1,0 +1,49 @@
+\chapter{Single-channel SAR}
+
+
+\section{Textures}
+
+%---------------------------------------------------------------
+\subsection{Variation coeffiecient}
+%---------------------------------------------------------------
+
+This function calculates the variation coefficient of an
+amplitude or intensity SAR image. The variation coefficient
+is defined as
+%\be
+\begin{equation}
+  var = \frac{variance(x)}{mean(x)^2}
+\end{equation}
+%\ee
+and is a measure of the amount of local gray-value variation.
+In homogeoneous regions, its value is idependent of the 
+local image amplitude; edges appear emphasized.
+
+RAT allows to set the size in $x$ and $y$ of the box used
+for estimation of variance and mean.
+
+%---------------------------------------------------------------
+\subsection{RFI filter}\label{sec:sarrfi}
+%---------------------------------------------------------------
+
+This routines (tries) to filter out so-called radio frequency interferences (RFI).
+RFI come from received energy, which was not emitted by the SAR (mobile phones,
+radio beacons, etc).
+
+You have to set precisely some system parameters. RAT assumes the near range
+to be on the left side of the displayed image! That's important. If the system
+parameters are not precise, you can expect very stange filtering results. 
+
+After starting the detection and waiting a bit, an image is shown, where potential RFI appear as
+"white" spots. You can now use the sliders to adjust the notch filter. Ideally,
+it should cancel out all the white spots (but not the rest). There are two filter parameters: The detection threshold sets the sensitivity
+of detecting interferences. A value of 2.0 means that all RFI having an energy
+of larger then 2.0 times the background are detected. The filter strength sets
+the radius of the notch filter used for removing the detected RFI. A value of
+3 means that a circle of radius 3 around the RFI peak is removed. You'll have to
+press 'update window' if you want to see what'll happen when using the actual
+filter parameters.
+
+When you think your settings are fine, press "start filtering"....
+
+\subsection{Co-occurence features}

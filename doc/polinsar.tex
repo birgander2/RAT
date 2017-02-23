@@ -1,0 +1,27 @@
+\chapter{Polarimetric Interferometry (PolInSAR)}
+
+\section{Data Types}
+
+RAT can handle polarimetric interferometric images. A POLInSAR image
+pair is stored in a single file, in pixel interleave format.
+The dimensions of data are: $N_x,N_y$ --- image dimensions; $N_{pol}$ --- number of
+polarimetric channels (3 or 4), $N_{intrf}$ --- number of baselines (only 2
+baselines are supported).
+
+\begin{itemize}
+  \item \emph{PolInSAR scattering vector}
+    \[data = [ N_{intrf}; N_{pol}; N_x; N_y ]\]
+  \item \emph{PolInSAR covariance matrix}
+    \[data = [ N_{2pol}; N_{2pol}; N_x; N_y ]\qquad N_{2pol}=2*N_{pol}=N_{intrf}*N_{pol}\]
+\end{itemize}
+
+
+\section{Inspect}
+
+%---------------------------------------------------------------
+\subsection{Coherence Analysis}
+%---------------------------------------------------------------
+A variety of methods is used to visualize the POLInSAR coherence behavior in
+dependence of averaging kind and quantity, computation methods, optimization
+parameters, random coherence projections, etc. Compare \cite{cloude03:inversion,
+colin03:cohopt, flynn02:cohshape, guillaso05:esprit, yamada01:esprit}.

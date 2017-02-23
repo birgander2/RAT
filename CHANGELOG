@@ -1,0 +1,278 @@
+=============
+  CHANGELOG
+=============
+
+Version 0.21:
+
+- New routine: Import of PALSAR ERSDAC (CEOS and VEXCEL) format
+- New routine: Range antenna profile removal
+- New routine: CDA sidelobe suppression / resolution enhancement
+- New routine: Polarimetric SERD/DERD parameters
+- New routine: Ainsworth PolSAR calibration
+- New routine: Polarimetric SNR estimation
+- Improvemed batch mode
+- Faster preview calculation & zoom
+- Inline documentation based on IDLdoc
+- Various small improvements and bug fixes
+
+
+Version 0.20:
+
+- New routines: TerraSAR-X and metadata loader
+- New routine : GB-SAR (UPC) loader
+- New routine : MB incoherent PolInSAR stationarity
+- New routine : DEM topography removal (for PolInSAR)
+- New routine : diagonal image mirror (range/azimuth transpose)
+- New option  : logarithmic scaling of amplitude
+- Improved routine: offset pixel handling options for coarse corregistration
+- Improved routine: block processing support for CONVAIR loader
+- Framework for external plugins
+- Framework for batch processing without GUI
+- Simplified tiling code
+- Additional information in the crash dialog window
+- Bugfix: Fixed crash for data > 2GB in cut_region
+- Bugfix: Fixed some preview bugs (still not completely clean)
+- Various small improvements and bug fixes
+
+
+Version 0.19:
+
+- Change to the MPL 1.1 license
+- Move to Berlios
+- New routines: PolDInSAR phase and height estimation from MB-PolInSAR data
+- New routine : Individual basis transformation per pixel (with given SM vectors)
+- New routines: Import of ASF SLC formats (ERS, JERS, RADARSAT-1)
+- Improved routines: Corrected RoA edge detectors
+- Improved routines: Possibility to save optimal scattering mechanism vectors in MB-PolInSAR
+- Various small improvements and bug fixes
+
+
+Version 0.18:
+
+- New routines: Multibaseline Polarimetric SAR Interferometry framework
+- New routines: +Optimization, +Coherence Analysis, + Matrix Normalization, ...
+- New routines: import system parameter information: generic, ESAR and RAMSES files
+- Multifiles  : +relative pathnames, +".mrat"-file extension, +save multifiles in subdirectory
+- Multifiles  : +POLSAR, but no support in functions till now, needs a universal framework
+- New routine : Expectation maximisation polarimetric classifier incl. label relaxation
+- New routine : construct and modify flat earth phase files
+- New routines: construct wavenumber and baseline lengths files
+- Improved routine: Corrected and improved ALOS-PALSAR import
+- Improved routine: Wishart k-means usability enhancements and significant speed-up
+- Improved routine: Wishart k-means H/a/A usability enhancements
+- Various small improvements and bug fixes
+
+
+Version 0.17:
+
+- New : Crash handler for improved stability
+- New : Handling of 'multifiles' (combination of several images, single channel only)
+- New routine : Various change detection routines (single channel)
+- New routine : Import for ALOS-PALSAR data
+- Bugfix: Fixed crash when clicking the window kill buttons
+- Bugfix: Fixed crash in patched co-registration
+- Bugfix: Fixed crash in gaussian speckle filter
+- Bugfix: Fixed crash in preferences dialog
+- Bugfix: Fixed data loss with strange tmpdir settings
+- Various small improvements and bug fixes
+
+
+Version 0.16:
+
+- New routine : Wizard mode for speckle filtering
+- New routine : For reciprocal polarimetric data: reduce 4 polarizations to 3 polarizations
+- New routine : POLINSAR coherence phase diversity
+- New routine : POLINSAR coherence optimization with one scattering mechanism (Numerical Radius)
+- New routine : Unsupervised Wishart Expectation Maximisation Classification
+- New routine : Import filter for RAMSES data (Onera)
+- New routine : IDAN-LLMMSE speckle filter
+- New routines: Filtering of radio frequency interferences (RFI)
+- New routines: Sub-apertures processing
+- New routine : Channel spectrum in range and azimuth for a quick look
+- New routines: Some "wizard" routines combining several processing steps
+- New routine : Import filter for RADARSAT-2 data (not yet in space...)
+- New routine : Import filter for CONVAIR data (Canada, airborne sensor)
+- New routine : Import filter for PI-SAR MPG data (Japan, airborne sensor)
+- Improved routine: Symmetrisation of Cross-Polar channels  -> handling of cov/coh matrices and POLINSAR data
+- Improved routine: Refined Lee speckle filter -> choice of edge detectors
+- Improved routine: Better RoA edge estimation
+- Improved Routines: Speckle Filters -> take into account the cancel button function
+- Improved Routine: "wizard" -> take into account if the cancel button is used.
+- Improved Routine: progress -> allow to have two progress bar (useful when there are two loops)
+- Improved Routine: Channel spectrum in X and Y direction
+- Bugfix: Edit header 'save info' button is now working
+- Bugfix: Polsarpro import: Wrong indices/signs of C and T matrices
+- Various small bug fixes
+
+
+Version 0.15:
+
+- New: Support for colour palettes (single channel images, classifications)
+- New: RAT can be run in multiple instances
+- New: File name on the top of the main window (lot of change in io/open_*.pro files, generate_preview.pro, undo.pro, save_rat.pro)
+- New routine: Automatic optimisation of classification indices
+- New routine: Calculation of alpha, beta, gamma and delta angles
+- New routine: Direct import of EMISAR data
+- Improved routine: progress (faster)
+- Improved routine: Entropy / Alpha calculation
+- Bugfix: Measure value blocked (Windows only)
+- Bugfix: Wrong channel names in eigendecomposition
+- Bugfix: Zoom function now correctly displays individual pixels
+- Bugfix: Possible crash when zooming very small regions
+- Bugfix: Possible crash when zooming near image boundaries
+- Bugfix: Strange scrolling during cut region (Windows only)
+- Bugfix: Problem when moving the window content with mouse (Windows only)
+- Bugfix: Progress window stays in front now
+- Bugfix: Missing hamming routine added to source distribution
+- Bugfix: Crash in generic binary import
+- Lots of major and minor bug fixes
+
+
+Version 0.14:
+
+- New: Various routines concerning PolInSAR (polarimetric interferometry)
+- New routine: Region growing coherence estimation
+- New routine: Remove flat-earth based on the imaging geometry
+- New routine: New InSAR coregistration based on multiple image patches
+- New routine: Calculation of PolSAR interchannel correlation, ratios and phase differences
+- New routine: Polarimetric CFSAR edge detector
+- New routine: Precise calculation of # of looks
+- New routines: tool_box --> Improved select channel function and Project data management
+- New routine: cw_rat_dialog_pickfile --> allow to save the 15 last directories visited (need the new preference file)
+- Improved routine: definitions --> add cancel tag in wid structure.
+- Improved routine: whatisthis --> recalculate the preview, save info directly in the file itself
+- Improved routine: progress --> add a cancel button
+- Improved routine: tool_box --> new data management with preview file visualisation
+- Improved routine: cw_rat_dialog_pickfile --> with preview file, allow to use the 15 last loaded files, make new directory, add file in data management
+- Improved routine: Cut out region can scroll now (and doesn't crash anymore?)
+- Improved routine: InSAR coregistation now working also for spaceborne data (and much faster)
+- Improved routine: Faster estimation of linear flat-earth component
+- Improved routine: whatisthis --> Change the selection of file type (sub-categories to avoid long list)
+- Improved routine: apply/remove weighting function --> simplification of the GUI
+- Improved routine: srat --> add the PREVIEW keyword to save the preview image
+- Improved routine: rrat --> add the PREVIEW keyword to read the preview image
+- Improved routine: generate_preview --> the preview is calculated only once and save in the original file
+- Improved routine: rat_install --> add the update_pref keyword, in order to save the current preference in the new preference file
+- Improved routine: definitions --> add the "prefdir" tag to config structure.
+- Improved RAT format: add the preview file at the end of the normal file.
+- Improved routine: Improved performance of the Kuan speckle filter
+- Bugfix: Crash when trying to save without specifying a filename
+- Lots of minor bug fixes
+
+
+Version 0.13:
+
+- New routine: Moriyama decomposition for urban areas
+- New routine: Lee'04 polarimetric category preserving classifier
+- New routine: MSP-RoA edge detector
+- New routine: Measure value / position tool, to check data values
+- New routine: Calculation of variation coefficient
+- Improved routine: Full support of ENVISAT-ASAR (except Level-0 products)
+- Improved routine: Improved performance of the Gamma-MAP speckle filter
+- Improved routine: New and improved Freeman-Durden decomposition
+- Ask before overwriting a file
+- Bugfix: Crash in mousebox (zoom, cut...), when moving out of the window
+- Bugfix: Crash in preview.pro for some strange image sizes
+- Bugfix: Crash during import of large ENVISAR data files
+- Lots of minor bugfixes
+
+Version 0.12:
+
+- New routine: Least-squares phase unwrapping
+- New routine: Rewrapping of unwrapped phase (for quality control)
+- New routine: Calculation of phase differences
+- New routine: Calculation of co-occurance texture features
+- New routine: Select channels for displaying individual channels
+- Much improved handling of multichannel images
+- Improved routine: Much faster maximum gradient edge detector (now correctly called RoA)
+- Support for mouse-wheel and direct image scolling by mouse
+- Iconbar for the most important routines
+- Change to a preferences directory (containg icons and more)
+- Some font problems on Windows corrected
+- Lots of bugfixes
+
+Version 0.11:
+
+- New routine: Polarimetric physical classification
+- New routine: Polarimetric No. of scatterer identification
+- New routine: Optimised Entropy / Alpha / Anisotropy Wishart classifier
+- New routine: Polarimetric phase/amplitude imbalace calibration
+- New routine: Cross-polar symmetrisation
+- New routine: Airborne InSAR parameter calculation
+- New routine: Shaded relief from InSAR phase
+- New routine: POLSARPRO import (very limited, we wait for V2.0)
+- Improved routine: PolSAR vector to matrix now with presumming
+- Improved routine: Eigendecomposition now with internal smoothing
+- Improved routine: More flexible zoom region module
+- Improved routine: ENVI export can now save classifications
+- Bugfix: Corrected Pauli decomposition of 4 channel images
+- Faster implementations of Lee and refined Lee speckle filters
+- Further improved Windows support
+- Lots of bugfixes
+
+Version 0.10:
+
+- New routine: Wishart classification module (well, a very slow one...)
+- New routine: Polarimetric point target analysis
+- New routine: Transforms between coherency and covariance matrices
+- New routine: InSAR Flat-earth removal from file
+- New routine: ENVISAT-ASAR import (alpha quality, only SLC up to now)
+- Replaced routine: Much better import of E-SAR data
+- Bugfix: Save pixmap routine corrected (and improved)
+- Bugfix: Open pixmap routine corrected
+- Bugfix: Colormap problem at startup (only on M$-Windows) corrected
+- Several changes for an improved GUI on M$-Windows
+- Removed double functionality in zoom_region and generate_preview
+- Main window cannot be resized anymore
+- Several minor bugfixes
+
+Version 0.9:
+
+- Many, many minor and major bugfixes
+- New routine: Entropy / Alpha (+Anisotropy) classifier 
+- New routine: Kuan speckle filter
+- New routine: Frost speckle filter
+- New routine: Gamma-MAP speckle filter
+- New routine: Transforms between amplitude and intensity image
+- Bugfix: Hopefully now correct handling of colors on all display types
+- Bugfix: Correct MMSE speckle filtering of amplitude images
+- Bugfix: Possible crash during preview calculation (progress bar)
+- Bugfix: Corrected the usage of wrong files during automatic preprocessing
+- Bugfix: Better display of Entropy / Alpha images
+- Bugfix: Polarimetry with all 4 channels work (slightly) better
+- Bugfix: Possible crash (end-of-file) during block processing with overlaps
+- Reordering of some files for correctly solving compilation dependencies
+
+Version 0.8:
+
+- New routine: Lee-Sigma speckle filter
+- New routine: ENVI import (limited)
+- New routine: ENVI export
+- New routine: Generic binary export
+- New routine: Correct Goldstein InSAR filter (formerly Power-Z)
+- Bugfix: Freeman-Durden decomposition should be correct now
+- Bugfix: slant2ground-projection: image dimensions not updated
+- Bugfix: cutregion: wrong widget identifier error
+- Several minor bugfixes
+
+Version 0.7:
+
+- New routine: Corner reflector analysis
+- New routine: Distributed target analysis
+- New routine: Cut out region
+- New routine: Zoom region
+- New routines: Open some of my internal formats
+- New menu point: Open external formats
+- New routine: Open E-SAR data (alpha quality routine)
+- Correct vertical scaling of the preview image
+- Split of preview.pro into two routines
+- Several minor bugfixes
+
+Version 0.6: 
+
+- Initial release to the public
+
+Version 0.0 - 0.5
+
+- Concept, internal development, basic functionality
+

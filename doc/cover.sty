@@ -1,0 +1,67 @@
+\newcommand{\NOVERSION}{000}
+\newcommand{\LADATE}{30. April 2004}
+
+%======================================================================
+% Page dimension
+\setlength{\hoffset}{-1cm}
+\setlength{\voffset}{-2cm}
+\setlength{\paperheight}{297mm}
+\setlength{\paperwidth}{210mm}
+\setlength{\textwidth}{179.2mm}
+\setlength{\marginparwidth}{0mm}
+\setlength{\headheight}{2\baselineskip}
+\setlength{\textheight}{235mm}
+\setlength{\evensidemargin}{0mm}
+\setlength{\oddsidemargin}{0mm}
+
+
+
+\newcommand{\makecover}{
+\thispagestyle{empty}
+\begin{flushright}
+		\includegraphics[scale=1]{images/pdf/rat_icon.pdf}
+		\linebreak 
+		\linebreak 
+		\linebreak 
+		\linebreak 
+		\linebreak 
+		\linebreak 
+		\linebreak 
+		\linebreak 
+		\linebreak 
+		\linebreak 
+		\linebreak 
+		\linebreak 
+		\linebreak 
+\end{flushright}
+\begin{center}
+		\includegraphics[scale=0.6]{images/pdf/rat_user_guide.pdf}\\
+		Version \NOVERSION\\
+		\LADATE
+		\linebreak 
+		\linebreak 
+		\linebreak 
+		\linebreak 
+		\linebreak 
+		\linebreak 
+		\linebreak 
+		\linebreak 
+		\linebreak 
+		\linebreak 
+		\linebreak 
+		\linebreak 
+		\linebreak 
+		\linebreak 
+		\linebreak 
+		\linebreak
+		\includegraphics[scale=1]{images/pdf/ratlogo_maus.pdf}\\ 
+\end{center}
+}
+
+\newcommand{\version}[1]{%
+\renewcommand{\NOVERSION}{#1}%
+}
+
+\newcommand{\datenow}[1]{%
+\renewcommand{\LADATE}{#1}%
+}

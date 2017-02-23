@@ -1,0 +1,14 @@
+\subsection{Radarsat-2}
+This routine is made for importing RADARSAT-2 data in Geo-TIFF format into RAT.
+Up to now, it has been only tested using simulated data - RADARSAT-2 is not yet
+in space!
+
+Basically, this routine has only two options: Reading quad-pol data, i.e. data
+composed out of the four polarisation HH,VV,HV and VH, or single-pol data. Since
+RAT does not support partial polarimetry, dual-pol data are threated as two
+individual single-pol files. When reading quad-pol data, only one of the four files
+has to be selected in the fileselector. RAT will automatically find the 3 others.
+When not all the 4 files are found, RAT switches back to single-pol.
+
+Many thanks to Daniel De Lisle from CSA for providing a CD with simulated sample
+data.

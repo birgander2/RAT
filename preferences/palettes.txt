@@ -1,0 +1,11 @@
+A:Current color table
+S:RAT's suggestion
+S:b/w (linear)
+S:rainbow (linear)
+S:haze (linear)
+S:classification
+S:6 classes
+S:8 classes
+S:10 classes
+S:16 classes
+S:20 classes

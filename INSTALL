@@ -1,0 +1,15 @@
+get the rat source
+	svn checkout http://svn.berlios.de/svnroot/repos/radartools/trunk
+		or 
+	wget http://download.berlios.de/radartools/rat_v0.20_source.tar.gz
+		tar zxf rat_v0.20_source.tar.gz
+		cd rat_v0.20
+
+start the idl
+	idl
+	IDL> .r rat_install
+	IDL> rat_install
+	IDL> exit
+
+have a nice fun
+	./rat
