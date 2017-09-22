@@ -215,9 +215,9 @@ PRO spectral_cda, CALLED=called, XMAX=xmax, YMAX=ymax, XBW=xbw, YBW=ybw
    endfor
 
    progress,Message='CDA processing...',/cancel_button
-   im = fltarr(file.xdim)
-   re = fltarr(file.xdim)
    for i=0l,file.ydim-1 do begin
+      im = fltarr(file.xdim)
+      re = fltarr(file.xdim)
       if i mod 100 eq 0 then progress,percent=i*100.0/(file.ydim)
       c1 = imaginary(arr[*,i])
       c2 = imaginary(arrh[*,i])
@@ -232,6 +232,7 @@ PRO spectral_cda, CALLED=called, XMAX=xmax, YMAX=ymax, XBW=xbw, YBW=ybw
       if nr gt 0 then re[aux] = c1[aux] < c2[aux] 
       aux = where(c1 lt 0 and c2 lt 0,nr)
       if nr gt 0 then re[aux] = c1[aux] > c2[aux] 
+
       arr[*,i] = complex(re,im)
    endfor
 

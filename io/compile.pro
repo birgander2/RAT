@@ -19,12 +19,13 @@
 @io/get_par.pro
 @io/set_par.pro
 @io/rrat.pro
+@io/rrat_v2.pro
 @io/rpyrat.pro
 @io/srat.pro
 @io/rarr.pro
 @io/sarr.pro
 @io/open_rat.pro
-@io/open_pyrat.pro
+@io/open_ratv2.pro
 @io/open_rarr.pro
 @io/open_esardcslc.pro
 @io/open_fsardcslc.pro

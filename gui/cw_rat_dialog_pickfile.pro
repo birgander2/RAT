@@ -261,6 +261,7 @@ function cw_rat_dialog_pickfile, $
 	READ=read, $
 	TITLE=title, $
 	WRITE=write,$
+	NOPREVIEW=nopreview, $
 	ADD_TOOL_BOX=add_tool_box
 	
 	common rat, types, file, wid, config
@@ -293,6 +294,7 @@ function cw_rat_dialog_pickfile, $
 		if not keyword_set(read) then read=0
 		if not keyword_set(title) then title=0
 		if not keyword_set(write) then write=0
+		if not keyword_set(nopreview) then nopreview=0		
 		add_tool_box = 0;
 		return,cw_rat_dialog_pickfile_prev(dialog_parent=dialog_parent, directory=directory, filter=filter, get_path=get_path, must_exist=must_exist, overwrite_prompt=overwrite_prompt, path=path, read=read, title=title, write=write)
 	endif
@@ -376,7 +378,7 @@ function cw_rat_dialog_pickfile, $
 
 	
 ; ---- CHECK IF DISPLAY PREVIEW IS AVAILABLE ----
-	if filter[0] ne '*.rat' && filter[0] ne '*.rat;*.mrat' && filter[0] ne '*.mrat' then begin
+	if (filter[0] ne '*.rat' && filter[0] ne '*.rat;*.mrat' && filter[0] ne '*.mrat') or keyword_set(nopreview) then begin
 		widget_control,SecondLinePreviewUpBase,map=0
 		widget_control,SecondLinePreviewDownDisplayButton,sensitive=0,set_value=0
 		widget_control,SecondLinePreviewDownDisplayAddDataManagementButton,sensitive=0,set_value=0

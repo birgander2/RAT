@@ -21,7 +21,7 @@ pro about
 	common rat, types, file, wid, config
 
 	infostring = [ $
-	'RAT - Radar Tools  (Version: FINAL-02)',$
+	'RAT - Radar Tools  (Version: FINAL-03)',$
 	'------------------------------------------------',$
 	'(c) 2003-2011 by the RAT development team',$
 	'------------------------------------------------',$
